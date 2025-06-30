@@ -73,18 +73,6 @@ val_preds = model.predict(X_val)
 mae = mean_absolute_error(y_val, val_preds)
 print(f"Mean Absolute Error on 2023 validation set: {mae:.2f}")
 
-# Plot actual vs predicted FP
-plt.figure(figsize=(8, 6))
-plt.scatter(y_val['FP'], val_preds[:, y_val.columns.get_loc('FP')], alpha=0.7)
-plt.xlabel("Actual FP (2023)")
-plt.ylabel("Predicted FP (2023)")
-plt.title("2023 Fantasy Point Prediction Accuracy")
-plt.plot([y_val['FP'].min(), y_val['FP'].max()],
-         [y_val['FP'].min(), y_val['FP'].max()], color='red', linestyle='--')
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-
 # Predict 2025 from 2024
 predict_df = df[df['Year'] == 2024]
 X_predict = predict_df[[f'prev_{col}' for col in stat_cols]]
